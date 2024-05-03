@@ -8,5 +8,4 @@ class SchedulingWcsApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
