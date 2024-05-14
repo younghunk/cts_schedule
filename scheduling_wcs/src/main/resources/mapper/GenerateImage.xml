@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="generateImage" >
-    <select id="getListForGenerateImage">
+    <select id="getListForGenerateImage" resultType="hashmap">
         SELECT REG_DATE
              , SEND_DTM
              , COM_NM
@@ -31,7 +31,6 @@
           and SEND_YN = 'Y'
           and PD_BARCODE is not NULL
           and PD_BARCODE != ''
-        LIMIT #{pageSize},1;
     </select>
 
     <insert id="insertGenerateImageBLOB" parameterType="com.schedule.dto.GenerateImageResponse">
