@@ -32,9 +32,9 @@
              , SEND_ZIPCODE
              , PD_MEMO
         FROM TB_INVOICE_KD_MASTER A
-           /*, (SELECT @ROWNUM := 0) AS ROWNUM
+           , (SELECT @ROWNUM := 0) AS ROWNUM
         WHERE SEND_YN = 'N'
-          AND HOLIDAY_YN = 'N'*/
+          AND HOLIDAY_YN = 'N'
     </select>
 
     <insert id="saveSendReservationInfo" parameterType="com.schedule.dto.SendReservationResponse">
