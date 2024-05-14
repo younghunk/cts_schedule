@@ -27,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.schedule.sendresv.SendReservationService;
+
 @Component
 public class ScheduledTasks {
 
@@ -37,11 +39,16 @@ public class ScheduledTasks {
 	@Autowired
 	TestDao dao;
 	
-	@Scheduled(fixedRate = 3000)
+	@Autowired
+	SendReservationService sendService;
+	
+	@Scheduled(fixedRate = 10000)
 	public void reportCurrentTime() {
-		log.info("The time is now {}", dateFormat.format(new Date()));
-		List<HashMap<String, String>> list = dao.selectSendReservationRequest();
-		log.info(">>>>>>>>>>>>>>list:"+list);
+//		log.info("The time is now {}", dateFormat.format(new Date()));
+//		List<HashMap<String, String>> list = dao.selectSendReservationRequest();
+//		log.info(">>>>>>>>>>>>>>list:"+list);
+		sendService.creatStepSendReservation();
+		
 	}
 	
 	@Scheduled(cron = "1 * * * * ?")
