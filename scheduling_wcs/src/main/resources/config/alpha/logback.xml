@@ -1,11 +1,35 @@
 <configuration>
-  <appender name="CONSOLE"
+
+    <property name="LOGS_PATH" value="./logs" />
+    <appender name="CONSOLE"
 		class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern> %d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %cyan(%logger) : %msg%n </pattern>
 		</encoder>
 	</appender>
-  
+
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_PATH}/logback.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_PATH}/file-%d{yyyy-MM,aux}/api-logback.%d{yyyy-MM-dd}.%i.log.gz
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>50MB</maxFileSize>
+                <!-- kb, mb, gb -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-4relative --- [
+                %thread{10} ] %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
   <logger name="com.framework" level="error" />
   
   <logger name="jdbc" level="OFF"/>
@@ -21,7 +45,8 @@
   <logger name="org.apache" level="error" />
   
   <root level="DEBUG">
-    <appender-ref ref="CONSOLE" />
+      <appender-ref ref="CONSOLE" />
+      <appender-ref ref="FILE" />
   </root>
   
 </configuration>
