@@ -42,7 +42,7 @@ public class ScheduledTasks {
 	@Autowired
 	SendReservationService sendService;
 	
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedRate = 3000)
 	public void reportCurrentTime() {
 //		log.info("The time is now {}", dateFormat.format(new Date()));
 //		List<HashMap<String, String>> list = dao.selectSendReservationRequest();
