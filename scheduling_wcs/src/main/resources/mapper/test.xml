@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="test">
 
-	<select id="selectList1" resultType="hashmap">
+	<select id="selectSendReservationRequest" resultType="hashmap">
         SELECT
             *
-        FROM ap_crew_flight_activities_log
+        FROM TB_INVOICE_KD_MASTER
     </select>
 </mapper>
