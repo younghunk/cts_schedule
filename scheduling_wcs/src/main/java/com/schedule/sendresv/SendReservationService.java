@@ -7,12 +7,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.schedule.dto.SendReservationResponse;
 import com.schedule.enums.Method;
 import com.schedule.enums.Response;
+import com.schedule.genimg.GenerateImageService;
 import com.schedule.util.APIRequest;
 
 @Service
@@ -24,6 +24,8 @@ public class SendReservationService {
 	
 	@Autowired
 	SendReservationDao sendDao;
+	@Autowired
+	GenerateImageService geneDao;
 	
 	public void creatStepSendReservation() {
 		List<HashMap<String, Object>> list=  sendDao.selectSendReservationRequest();
@@ -44,5 +46,7 @@ public class SendReservationService {
             sendDao.saveSendReservationInfo(item);
             log.info("Process Parcel CJ Response BL Number" + item.getBL() + " and Code" + item.getCODE() + " Written Completed!!!");
         }
+		
+		geneDao.generateImageAndSave();
 	}
 }
